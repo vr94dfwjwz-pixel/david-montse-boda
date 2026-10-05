@@ -7,7 +7,12 @@
   <title>David & Montse · 07 de maig de 2027</title>
 
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap');
+
+    /* =====================================================
+       BASE
+    ===================================================== */
 
     * {
       box-sizing: border-box;
@@ -15,29 +20,47 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: #eee8dc;
-      color: #3e473e;
+      color: #4f594d;
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
     }
 
-    /* =========================
-       PANTALLA INICIAL
-    ========================== */
+
+    /* =====================================================
+       PANTALLA DE APERTURA
+    ===================================================== */
 
     .opening {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 1000;
+
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+
       background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.7), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(190,180,150,.15), transparent 35%),
+        radial-gradient(
+          circle at 20% 15%,
+          rgba(255,255,255,.75),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 85%,
+          rgba(190,180,150,.16),
+          transparent 35%
+        ),
         #eee8dc;
-      transition: opacity 1s ease, visibility 1s ease;
+
+      transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
     }
 
     .opening.hidden {
@@ -47,348 +70,581 @@
     }
 
     .paper {
-      width: min(92vw, 430px);
-      min-height: 100vh;
       position: relative;
+
+      width: min(100vw, 480px);
+      height: 100vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       overflow: hidden;
     }
 
-    /* Decoració floral */
+
+    /* =====================================================
+       DECORACIÓN PROVISIONAL
+    ===================================================== */
 
     .flower {
       position: absolute;
-      width: 100px;
-      height: 100px;
-      opacity: .8;
+
+      width: 110px;
+      height: 110px;
+
+      opacity: .75;
+
+      pointer-events: none;
     }
 
     .flower::before,
     .flower::after {
       content: "";
+
       position: absolute;
+
       border-radius: 50%;
-      background: #a9b5a0;
     }
 
     .flower::before {
-      width: 70px;
-      height: 35px;
+      width: 75px;
+      height: 38px;
+
+      background: #a9b5a0;
+
       transform: rotate(35deg);
+
       top: 25px;
       left: 10px;
     }
 
     .flower::after {
-      width: 55px;
-      height: 30px;
-      transform: rotate(-30deg);
-      top: 45px;
-      left: 40px;
+      width: 58px;
+      height: 32px;
+
       background: #d4b4ae;
+
+      transform: rotate(-30deg);
+
+      top: 48px;
+      left: 43px;
     }
 
     .flower.top {
       top: 15px;
-      left: -25px;
+      left: -30px;
+
       transform: rotate(-20deg);
     }
 
     .flower.bottom {
+      right: -25px;
       bottom: 20px;
-      right: -20px;
+
       transform: rotate(160deg);
     }
 
-/* =========================
-   SOBRE REALISTA
-========================= */
 
-.envelope {
-  width: 330px;
-  height: 225px;
-  position: relative;
-  margin-top: 30px;
-  perspective: 900px;
-  filter: drop-shadow(0 18px 20px rgba(70,65,55,.18));
-}
-
-/* Cos posterior del sobre */
-
-.envelope-back {
-  position: absolute;
-  inset: 0;
-  background: #d9c8a9;
-  border-radius: 3px;
-  z-index: 1;
-}
-
-/* CARTA
-   Inicialment queda amagada
-   dins del sobre */
-
-.letter {
-  position: absolute;
-
-  width: 270px;
-  height: 190px;
-
-  left: 30px;
-  top: 18px;
-
-  background: #f8f3e8;
-
-  z-index: 2;
-
-  text-align: center;
-  padding-top: 48px;
-
-  box-shadow: 0 4px 12px rgba(50,50,40,.12);
-
-  transform: translateY(35px);
-
-  transition:
-    transform 1.25s cubic-bezier(.4,0,.2,1);
-
-  border: 1px solid rgba(100,90,70,.08);
-}
-
-/* Part frontal del sobre */
-
-.envelope-front {
-  position: absolute;
-  inset: 0;
-
-  z-index: 4;
-
-  overflow: hidden;
-
-  pointer-events: none;
-}
-
-.envelope-front::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background: #cdb991;
-
-  clip-path: polygon(
-    0 0,
-    50% 52%,
-    100% 0,
-    100% 100%,
-    0 100%
-  );
-}
-
-.envelope-front::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background: #d5c19b;
-
-  clip-path: polygon(
-    0 100%,
-    50% 45%,
-    100% 100%
-  );
-}
-
-/* SOLAPA SUPERIOR */
-
-.flap {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 125px;
-
-  background: #dfcda9;
-
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    50% 100%
-  );
-
-  transform-origin: top center;
-
-  transition:
-    transform 1.1s cubic-bezier(.4,0,.2,1);
-
-  z-index: 7;
-
-  backface-visibility: hidden;
-}
-
-/* LACRE */
-
-.wax {
-  position: absolute;
-
-  width: 64px;
-  height: 64px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #cbb36d,
-      #9b7b35
-    );
-
-  left: calc(50% - 32px);
-  top: 102px;
-
-  z-index: 10;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: #f8efd1;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 20px;
-
-  border: 2px solid rgba(255,255,255,.25);
-
-  box-shadow:
-    0 4px 10px rgba(50,40,20,.25);
-
-  transition:
-    transform .8s ease,
-    opacity .8s ease;
-}
-
-/* =========================
-   ANIMACIÓ D'OBERTURA
-========================= */
-
-/* La carta surt de dins del sobre */
-
-.envelope.open .letter {
-  transform: translateY(-135px);
-  z-index: 6;
-}
-
-/* La solapa s'obre */
-
-.envelope.open .flap {
-  transform: rotateX(180deg);
-  z-index: 5;
-}
-
-/* El lacre desapareix */
-
-.envelope.open .wax {
-  transform:
-    scale(.7)
-    rotate(15deg);
-
-  opacity: 0;
-}
-
-    /* Títol */
+    /* =====================================================
+       TEXTO SUPERIOR
+    ===================================================== */
 
     .opening-title {
       position: absolute;
-      top: 10%;
-      text-align: center;
+
+      top: 9%;
+
       width: 100%;
+
+      text-align: center;
+
+      z-index: 20;
     }
 
     .opening-title p {
       font-size: 9px;
+
       letter-spacing: 4px;
+
       text-transform: uppercase;
+
       color: #76806f;
     }
 
     .opening-title h1 {
+      margin-top: 7px;
+
       font-family: 'Parisienne', cursive;
-      font-size: 48px;
+
+      font-size: 50px;
+
       font-weight: 400;
+
       color: #4f594d;
-      margin-top: 5px;
     }
 
-    /* Botó */
+
+    /* =====================================================
+       SOBRE
+    ===================================================== */
+
+    .envelope {
+      position: absolute;
+
+      width: 330px;
+      height: 220px;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -42%);
+
+      perspective: 1200px;
+
+      filter:
+        drop-shadow(
+          0 18px 22px rgba(70,65,55,.18)
+        );
+    }
+
+
+    /* =====================================================
+       CUERPO TRASERO DEL SOBRE
+    ===================================================== */
+
+    .envelope-back {
+      position: absolute;
+
+      inset: 0;
+
+      background: #d9c8a9;
+
+      border-radius: 3px;
+
+      z-index: 1;
+    }
+
+
+    /* =====================================================
+       TARJETA
+    ===================================================== */
+
+    .letter {
+      position: absolute;
+
+      width: 270px;
+      height: 190px;
+
+      left: 30px;
+
+      /*
+        Muy abajo inicialmente.
+        Esto hace que quede escondida dentro
+        del cuerpo del sobre.
+      */
+      top: 48px;
+
+      background: #f8f3e8;
+
+      text-align: center;
+
+      padding-top: 45px;
+
+      box-shadow:
+        0 4px 15px rgba(50,50,40,.14);
+
+      border:
+        1px solid rgba(100,90,70,.08);
+
+      /*
+        Estado inicial:
+        completamente escondida.
+      */
+      transform:
+        translateY(0);
+
+      transition:
+        transform 1.35s cubic-bezier(.25,.8,.25,1);
+
+      z-index: 2;
+    }
+
+    .letter-small {
+      font-size: 8px;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+
+      color: #7c8878;
+    }
+
+    .letter-names {
+      margin: 7px 0;
+
+      font-family: 'Parisienne', cursive;
+
+      font-size: 37px;
+
+      color: #555f52;
+    }
+
+    .letter-date {
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 16px;
+
+      letter-spacing: 2px;
+    }
+
+
+    /* =====================================================
+       PARTE FRONTAL DEL SOBRE
+    ===================================================== */
+
+    .envelope-front {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 5;
+
+      pointer-events: none;
+
+      overflow: hidden;
+    }
+
+
+    /* Parte izquierda/derecha */
+
+    .envelope-front::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: #cdb991;
+
+      clip-path:
+        polygon(
+          0 0,
+          50% 52%,
+          100% 0,
+          100% 100%,
+          0 100%
+        );
+    }
+
+
+    /* Triángulo inferior */
+
+    .envelope-front::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: #d5c19b;
+
+      clip-path:
+        polygon(
+          0 100%,
+          50% 45%,
+          100% 100%
+        );
+    }
+
+
+    /* =====================================================
+       SOLAPA SUPERIOR
+    ===================================================== */
+
+    .flap {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 125px;
+
+      background: #dfcda9;
+
+      clip-path:
+        polygon(
+          0 0,
+          100% 0,
+          50% 100%
+        );
+
+      transform-origin: top center;
+
+      transform:
+        rotateX(0deg);
+
+      transition:
+        transform 1.15s cubic-bezier(.35,.05,.2,1);
+
+      backface-visibility: hidden;
+
+      z-index: 7;
+    }
+
+
+    /* =====================================================
+       LACRE
+    ===================================================== */
+
+    .wax {
+      position: absolute;
+
+      width: 64px;
+      height: 64px;
+
+      left: 50%;
+      top: 101px;
+
+      transform:
+        translateX(-50%);
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #cbb36d,
+          #9b7b35
+        );
+
+      border:
+        2px solid rgba(255,255,255,.25);
+
+      box-shadow:
+        0 4px 10px rgba(50,40,20,.25);
+
+      color: #f8efd1;
+
+      font-family:
+        'Cormorant Garamond', serif;
+
+      font-size: 20px;
+
+      transition:
+        transform .55s ease,
+        opacity .55s ease;
+
+      z-index: 20;
+    }
+
+
+    /* =====================================================
+       ANIMACIÓN DE APERTURA
+    ===================================================== */
+
+    /*
+      FASE 1:
+      la solapa se abre.
+    */
+
+    .envelope.open .flap {
+      transform:
+        rotateX(180deg);
+    }
+
+
+    /*
+      FASE 2:
+      la carta sube.
+    */
+
+    .envelope.open .letter {
+      transform:
+        translateY(-155px);
+
+      transition-delay:
+        .55s;
+
+      z-index: 8;
+    }
+
+
+    /*
+      FASE 3:
+      desaparece el lacre.
+    */
+
+    .envelope.open .wax {
+      transform:
+        translateX(-50%)
+        scale(.65)
+        rotate(18deg);
+
+      opacity: 0;
+
+      transition-delay:
+        .15s;
+    }
+
+
+    /* =====================================================
+       BOTÓN
+    ===================================================== */
 
     .open-button {
       position: absolute;
-      bottom: 11%;
+
       left: 50%;
-      transform: translateX(-50%);
-      border: 1px solid #9d947b;
-      background: rgba(248,243,232,.65);
-      color: #555c51;
-      padding: 14px 27px;
-      font-family: 'Montserrat', sans-serif;
+      bottom: 11%;
+
+      transform:
+        translateX(-50%);
+
+      padding:
+        14px 27px;
+
+      border:
+        1px solid #9d947b;
+
+      background:
+        rgba(248,243,232,.65);
+
+      color:
+        #555c51;
+
+      font-family:
+        'Montserrat', sans-serif;
+
       font-size: 10px;
+
       letter-spacing: 2px;
+
       cursor: pointer;
-      transition: all .3s ease;
+
+      transition:
+        opacity .5s ease,
+        background .3s ease,
+        color .3s ease;
+
+      z-index: 30;
     }
 
     .open-button:hover {
       background: #555c51;
-      color: #fff;
+      color: white;
     }
+
+    .open-button.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
+    /* =====================================================
+       FLECHA
+    ===================================================== */
 
     .arrow {
       position: absolute;
+
       bottom: 5%;
+
       font-size: 20px;
+
       color: #817b68;
-      animation: bounce 1.7s infinite;
+
+      animation:
+        bounce 1.7s infinite;
+
+      transition:
+        opacity .5s ease;
+    }
+
+    .arrow.hide {
+      opacity: 0;
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(7px); }
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(7px);
+      }
     }
 
-    /* =========================
-       INVITACIÓ
-    ========================== */
+
+    /* =====================================================
+       INVITACIÓN
+    ===================================================== */
 
     .invitation {
       display: none;
+
       background:
-        radial-gradient(circle at 10% 10%, rgba(255,255,255,.8), transparent 30%),
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(255,255,255,.8),
+          transparent 30%
+        ),
         #f4efe4;
     }
 
     .invitation.visible {
       display: block;
-      animation: appear 1.2s ease;
+
+      animation:
+        invitationAppear 1.3s ease;
     }
 
-    @keyframes appear {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes invitationAppear {
+
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
+
+
+    /* =====================================================
+       SECCIONES
+    ===================================================== */
 
     section {
       min-height: 100vh;
-      padding: 80px 25px;
+
+      padding:
+        80px 25px;
+
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
       align-items: center;
+
       text-align: center;
     }
+
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
 
     .intro {
       min-height: 100vh;
@@ -396,48 +652,78 @@
 
     .eyebrow {
       font-size: 9px;
+
       letter-spacing: 4px;
+
       text-transform: uppercase;
+
       color: #87917f;
+
       margin-bottom: 15px;
     }
 
     .names {
-      font-family: 'Parisienne', cursive;
-      font-size: clamp(55px, 16vw, 80px);
+      font-family:
+        'Parisienne', cursive;
+
+      font-size:
+        clamp(55px, 16vw, 80px);
+
       font-weight: 400;
+
       color: #4d584c;
+
       line-height: 1.1;
     }
 
     .date {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 23px;
-      letter-spacing: 3px;
       margin-top: 25px;
+
+      font-family:
+        'Cormorant Garamond', serif;
+
+      font-size: 23px;
+
+      letter-spacing: 3px;
+
       color: #6d715f;
     }
 
     .divider {
       width: 60px;
+
       height: 1px;
-      background: #b1a486;
-      margin: 30px auto;
+
+      margin:
+        30px auto;
+
+      background:
+        #b1a486;
     }
 
     .text {
       max-width: 330px;
-      font-family: 'Cormorant Garamond', serif;
+
+      font-family:
+        'Cormorant Garamond', serif;
+
       font-size: 21px;
+
       line-height: 1.55;
+
       color: #5e6258;
     }
 
-    /* Compte enrere */
+
+    /* =====================================================
+       COUNTDOWN
+    ===================================================== */
 
     .countdown {
       display: flex;
+
       gap: 12px;
+
       margin-top: 30px;
     }
 
@@ -446,150 +732,332 @@
     }
 
     .count-number {
-      font-family: 'Cormorant Garamond', serif;
+      font-family:
+        'Cormorant Garamond', serif;
+
       font-size: 32px;
+
       color: #596253;
     }
 
     .count-label {
       font-size: 7px;
+
       letter-spacing: 1px;
+
       text-transform: uppercase;
+
       color: #8c8b7a;
     }
 
-    /* Seccions */
+
+    /* =====================================================
+       SECCIONES
+    ===================================================== */
 
     .green {
-      background: #dfe4d8;
+      background:
+        #dfe4d8;
     }
 
     .gold {
-      background: #e8dfcb;
+      background:
+        #e8dfcb;
     }
 
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family:
+        'Cormorant Garamond', serif;
+
       font-size: 45px;
+
       font-weight: 400;
+
       color: #4f594d;
+
       margin-bottom: 20px;
     }
 
     .info-card {
       width: 100%;
+
       max-width: 360px;
-      padding: 35px 25px;
-      border: 1px solid rgba(90,90,70,.2);
-      background: rgba(255,255,255,.25);
+
+      padding:
+        35px 25px;
+
+      border:
+        1px solid rgba(90,90,70,.2);
+
+      background:
+        rgba(255,255,255,.25);
+
       margin-top: 20px;
     }
 
     .info-card h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family:
+        'Cormorant Garamond', serif;
+
       font-size: 26px;
+
       font-weight: 500;
+
       margin-bottom: 10px;
     }
 
     .info-card p {
       font-size: 12px;
+
       line-height: 1.8;
+
       color: #62675e;
     }
 
     .calendar-button {
       margin-top: 25px;
-      padding: 14px 22px;
-      border: 1px solid #8d927f;
-      background: transparent;
-      color: #596052;
+
+      padding:
+        14px 22px;
+
+      border:
+        1px solid #8d927f;
+
+      background:
+        transparent;
+
+      color:
+        #596052;
+
       font-size: 9px;
+
       letter-spacing: 2px;
+
       text-transform: uppercase;
     }
 
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
     footer {
-      padding: 60px 20px;
+      padding:
+        60px 20px;
+
       text-align: center;
-      background: #4f594d;
-      color: #eee8dc;
+
+      background:
+        #4f594d;
+
+      color:
+        #eee8dc;
     }
 
     footer .footer-names {
-      font-family: 'Parisienne', cursive;
+      font-family:
+        'Parisienne', cursive;
+
       font-size: 42px;
     }
 
     footer p {
       margin-top: 15px;
+
       font-size: 9px;
+
       letter-spacing: 3px;
+
       text-transform: uppercase;
     }
+
+
+    /* =====================================================
+       AJUSTES MÓVIL
+    ===================================================== */
+
+    @media (max-width: 360px) {
+
+      .envelope {
+        width: 300px;
+        height: 200px;
+      }
+
+      .letter {
+        width: 244px;
+        height: 170px;
+        left: 28px;
+      }
+
+      .opening-title h1 {
+        font-size: 43px;
+      }
+
+      .open-button {
+        bottom: 10%;
+      }
+    }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- =========================
-       SOBRE INICIAL
-  ========================== -->
 
-  <div class="opening" id="opening">
+  <!-- ===================================================
+       SOBRE
+  ==================================================== -->
+
+  <div
+    class="opening"
+    id="opening"
+  >
 
     <div class="paper">
 
+
+      <!-- Decoración provisional -->
+
       <div class="flower top"></div>
+
       <div class="flower bottom"></div>
 
+
+      <!-- Título -->
+
       <div class="opening-title">
-        <p>La nostra història</p>
-        <h1>David & Montse</h1>
+
+        <p>
+          La nostra història
+        </p>
+
+        <h1>
+          David & Montse
+        </h1>
+
       </div>
 
-      <div class="envelope" id="envelope">
 
-        <div class="envelope-back"></div>
+      <!-- SOBRE -->
 
-        <div class="letter">
-          <div class="letter-small">El nostre casament</div>
-          <div class="letter-names">David & Montse</div>
-          <div class="letter-date">07 · 05 · 2027</div>
+      <div
+        class="envelope"
+        id="envelope"
+      >
+
+
+        <!-- Fondo -->
+
+        <div
+          class="envelope-back"
+        ></div>
+
+
+        <!-- CARTA -->
+
+        <div
+          class="letter"
+        >
+
+          <div class="letter-small">
+            El nostre casament
+          </div>
+
+          <div class="letter-names">
+            David & Montse
+          </div>
+
+          <div class="letter-date">
+            07 · 05 · 2027
+          </div>
+
         </div>
 
-        <div class="envelope-front"></div>
 
-        <div class="flap"></div>
+        <!-- Frente del sobre -->
 
-        <div class="wax">D · M</div>
+        <div
+          class="envelope-front"
+        ></div>
+
+
+        <!-- Solapa -->
+
+        <div
+          class="flap"
+        ></div>
+
+
+        <!-- Lacre -->
+
+        <div
+          class="wax"
+        >
+          D · M
+        </div>
+
 
       </div>
 
-      <button class="open-button" id="openButton">
+
+      <!-- Botón -->
+
+      <button
+        class="open-button"
+        id="openButton"
+      >
         OBRIR LA INVITACIÓ
       </button>
 
-      <div class="arrow">↓</div>
+
+      <!-- Flecha -->
+
+      <div
+        class="arrow"
+        id="arrow"
+      >
+        ↓
+      </div>
 
     </div>
+
   </div>
 
 
-  <!-- =========================
-       INVITACIÓ
-  ========================== -->
 
-  <main class="invitation" id="invitation">
+  <!-- ===================================================
+       INVITACIÓN
+  ==================================================== -->
 
-    <section class="intro">
+  <main
+    class="invitation"
+    id="invitation"
+  >
 
-      <div class="eyebrow">Ens casem!</div>
+
+    <!-- INTRO -->
+
+    <section
+      class="intro"
+    >
+
+      <div class="eyebrow">
+        Ens casem!
+      </div>
 
       <h1 class="names">
-        David<br>
-        <span>&</span><br>
+
+        David
+
+        <br>
+
+        <span>&</span>
+
+        <br>
+
         Montse
+
       </h1>
 
       <div class="divider"></div>
@@ -598,17 +1066,26 @@
         07 DE MAIG DE 2027
       </div>
 
-      <p class="text" style="margin-top:35px;">
-        Hi ha moments a la vida que mereixen ser compartits.
+      <p
+        class="text"
+        style="margin-top:35px;"
+      >
+        Hi ha moments a la vida
+        que mereixen ser compartits.
         I aquest és un d'ells.
       </p>
 
     </section>
 
 
+
+    <!-- COUNTDOWN -->
+
     <section class="green">
 
-      <div class="eyebrow">Guarda la data</div>
+      <div class="eyebrow">
+        Guarda la data
+      </div>
 
       <h2 class="section-title">
         Comença el compte enrere
@@ -616,38 +1093,91 @@
 
       <div class="countdown">
 
-        <div class="count-box">
-          <div class="count-number" id="days">--</div>
-          <div class="count-label">Dies</div>
-        </div>
 
         <div class="count-box">
-          <div class="count-number" id="hours">--</div>
-          <div class="count-label">Hores</div>
+
+          <div
+            class="count-number"
+            id="days"
+          >
+            --
+          </div>
+
+          <div class="count-label">
+            Dies
+          </div>
+
         </div>
 
-        <div class="count-box">
-          <div class="count-number" id="minutes">--</div>
-          <div class="count-label">Minuts</div>
-        </div>
 
         <div class="count-box">
-          <div class="count-number" id="seconds">--</div>
-          <div class="count-label">Segons</div>
+
+          <div
+            class="count-number"
+            id="hours"
+          >
+            --
+          </div>
+
+          <div class="count-label">
+            Hores
+          </div>
+
         </div>
+
+
+        <div class="count-box">
+
+          <div
+            class="count-number"
+            id="minutes"
+          >
+            --
+          </div>
+
+          <div class="count-label">
+            Minuts
+          </div>
+
+        </div>
+
+
+        <div class="count-box">
+
+          <div
+            class="count-number"
+            id="seconds"
+          >
+            --
+          </div>
+
+          <div class="count-label">
+            Segons
+          </div>
+
+        </div>
+
 
       </div>
 
-      <button class="calendar-button">
+
+      <button
+        class="calendar-button"
+      >
         + AFEGIR AL CALENDARI
       </button>
 
     </section>
 
 
+
+    <!-- CEREMONIA -->
+
     <section>
 
-      <div class="eyebrow">El gran dia</div>
+      <div class="eyebrow">
+        El gran dia
+      </div>
 
       <h2 class="section-title">
         La cerimònia
@@ -655,17 +1185,21 @@
 
       <div class="info-card">
 
-        <h3>07 de maig de 2027</h3>
+        <h3>
+          07 de maig de 2027
+        </h3>
 
         <p>
-          Cerimònia<br>
+          Cerimònia
+          <br>
           17:00 h
         </p>
 
         <div class="divider"></div>
 
         <p>
-          Properament us explicarem<br>
+          Properament us explicarem
+          <br>
           tots els detalls del lloc.
         </p>
 
@@ -674,9 +1208,14 @@
     </section>
 
 
+
+    <!-- CELEBRACIÓN -->
+
     <section class="gold">
 
-      <div class="eyebrow">I després...</div>
+      <div class="eyebrow">
+        I després...
+      </div>
 
       <h2 class="section-title">
         La celebració
@@ -684,7 +1223,9 @@
 
       <div class="info-card">
 
-        <h3>Brindem per nosaltres</h3>
+        <h3>
+          Brindem per nosaltres
+        </h3>
 
         <p>
           Després de la cerimònia,
@@ -697,9 +1238,14 @@
     </section>
 
 
+
+    <!-- CONFIRMACIÓN -->
+
     <section class="green">
 
-      <div class="eyebrow">Us esperem</div>
+      <div class="eyebrow">
+        Us esperem
+      </div>
 
       <h2 class="section-title">
         Voleu acompanyar-nos?
@@ -717,6 +1263,9 @@
     </section>
 
 
+
+    <!-- FOOTER -->
+
     <footer>
 
       <div class="footer-names">
@@ -729,85 +1278,191 @@
 
     </footer>
 
+
   </main>
 
 
+
+  <!-- ===================================================
+       JAVASCRIPT
+  ==================================================== -->
+
   <script>
 
-    /* =========================
-       OBRIR SOBRE
-    ========================== */
 
-    const openButton = document.getElementById("openButton");
-    const envelope = document.getElementById("envelope");
-    const opening = document.getElementById("opening");
-    const invitation = document.getElementById("invitation");
+    /* =================================================
+       APERTURA DEL SOBRE
+    ================================================= */
 
-    openButton.addEventListener("click", function() {
+    const openButton =
+      document.getElementById("openButton");
 
-      envelope.classList.add("open");
+    const envelope =
+      document.getElementById("envelope");
 
-      openButton.style.opacity = "0";
+    const opening =
+      document.getElementById("opening");
 
-      setTimeout(function() {
+    const invitation =
+      document.getElementById("invitation");
 
-        opening.classList.add("hidden");
-        invitation.classList.add("visible");
-
-        window.scrollTo({
-          top: 0,
-          behavior: "instant"
-        });
-
-      }, 1500);
-
-    });
+    const arrow =
+      document.getElementById("arrow");
 
 
-    /* =========================
-       COMPTE ENRERE
-    ========================== */
+    openButton.addEventListener(
+      "click",
+      function () {
 
-    const weddingDate = new Date("2027-05-07T17:00:00");
+
+        /*
+          Ocultamos controles.
+        */
+
+        openButton.classList.add("hide");
+
+        arrow.classList.add("hide");
+
+
+        /*
+          Iniciamos la animación
+          del sobre.
+        */
+
+        envelope.classList.add("open");
+
+
+        /*
+          Esperamos a que la tarjeta
+          termine de salir.
+        */
+
+        setTimeout(
+          function () {
+
+
+            opening.classList.add("hidden");
+
+            invitation.classList.add("visible");
+
+
+            window.scrollTo(
+              0,
+              0
+            );
+
+
+          },
+          2300
+        );
+
+      }
+    );
+
+
+
+    /* =================================================
+       CUENTA ATRÁS
+    ================================================= */
+
+    const weddingDate =
+      new Date(
+        "2027-05-07T17:00:00"
+      );
+
 
     function updateCountdown() {
 
-      const now = new Date();
-      const difference = weddingDate - now;
+
+      const now =
+        new Date();
+
+
+      const difference =
+        weddingDate - now;
+
 
       if (difference <= 0) {
-        document.getElementById("days").textContent = "0";
-        document.getElementById("hours").textContent = "0";
-        document.getElementById("minutes").textContent = "0";
-        document.getElementById("seconds").textContent = "0";
+
+        document.getElementById(
+          "days"
+        ).textContent = "0";
+
+        document.getElementById(
+          "hours"
+        ).textContent = "0";
+
+        document.getElementById(
+          "minutes"
+        ).textContent = "0";
+
+        document.getElementById(
+          "seconds"
+        ).textContent = "0";
+
         return;
+
       }
 
-      const days = Math.floor(
-        difference / (1000 * 60 * 60 * 24)
-      );
 
-      const hours = Math.floor(
-        (difference / (1000 * 60 * 60)) % 24
-      );
+      const days =
+        Math.floor(
+          difference /
+          (1000 * 60 * 60 * 24)
+        );
 
-      const minutes = Math.floor(
-        (difference / (1000 * 60)) % 60
-      );
 
-      const seconds = Math.floor(
-        (difference / 1000) % 60
-      );
+      const hours =
+        Math.floor(
+          (difference /
+            (1000 * 60 * 60)) % 24
+        );
 
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+
+      const minutes =
+        Math.floor(
+          (difference /
+            (1000 * 60)) % 60
+        );
+
+
+      const seconds =
+        Math.floor(
+          (difference /
+            1000) % 60
+        );
+
+
+      document.getElementById(
+        "days"
+      ).textContent = days;
+
+
+      document.getElementById(
+        "hours"
+      ).textContent = hours;
+
+
+      document.getElementById(
+        "minutes"
+      ).textContent = minutes;
+
+
+      document.getElementById(
+        "seconds"
+      ).textContent = seconds;
+
     }
+
 
     updateCountdown();
 
-    setInterval(updateCountdown, 1000);
+
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
 
   </script>
 
