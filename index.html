@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>David & Montse · 07 de maig de 2027</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    David & Montse · 07 de maig de 2027
+  </title>
+
 
   <style>
 
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap');
+    @import url(
+      'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap'
+    );
+
 
     /* =====================================================
        BASE
@@ -37,25 +49,33 @@
     ===================================================== */
 
     .opening {
+
       position: fixed;
+
       inset: 0;
+
       z-index: 1000;
 
       display: flex;
-      align-items: center;
+
       justify-content: center;
 
+      align-items: center;
+
       background:
+
         radial-gradient(
           circle at 20% 15%,
           rgba(255,255,255,.75),
           transparent 30%
         ),
+
         radial-gradient(
           circle at 80% 85%,
           rgba(190,180,150,.16),
           transparent 35%
         ),
+
         #eee8dc;
 
       transition:
@@ -63,24 +83,34 @@
         visibility 1.2s ease;
     }
 
+
     .opening.hidden {
+
       opacity: 0;
+
       visibility: hidden;
+
       pointer-events: none;
     }
 
+
     .paper {
+
       position: relative;
 
       width: min(100vw, 480px);
+
       height: 100vh;
 
       display: flex;
+
       justify-content: center;
+
       align-items: center;
 
       overflow: hidden;
     }
+
 
 
     /* =====================================================
@@ -88,9 +118,11 @@
     ===================================================== */
 
     .flower {
+
       position: absolute;
 
       width: 110px;
+
       height: 110px;
 
       opacity: .75;
@@ -98,8 +130,10 @@
       pointer-events: none;
     }
 
+
     .flower::before,
     .flower::after {
+
       content: "";
 
       position: absolute;
@@ -107,8 +141,11 @@
       border-radius: 50%;
     }
 
+
     .flower::before {
+
       width: 75px;
+
       height: 38px;
 
       background: #a9b5a0;
@@ -116,11 +153,15 @@
       transform: rotate(35deg);
 
       top: 25px;
+
       left: 10px;
     }
 
+
     .flower::after {
+
       width: 58px;
+
       height: 32px;
 
       background: #d4b4ae;
@@ -128,29 +169,38 @@
       transform: rotate(-30deg);
 
       top: 48px;
+
       left: 43px;
     }
 
+
     .flower.top {
+
       top: 15px;
+
       left: -30px;
 
       transform: rotate(-20deg);
     }
 
+
     .flower.bottom {
+
       right: -25px;
+
       bottom: 20px;
 
       transform: rotate(160deg);
     }
 
 
+
     /* =====================================================
-       TEXTO SUPERIOR
+       TÍTULO
     ===================================================== */
 
     .opening-title {
+
       position: absolute;
 
       top: 9%;
@@ -159,10 +209,12 @@
 
       text-align: center;
 
-      z-index: 20;
+      z-index: 30;
     }
 
+
     .opening-title p {
+
       font-size: 9px;
 
       letter-spacing: 4px;
@@ -172,7 +224,9 @@
       color: #76806f;
     }
 
+
     .opening-title h1 {
+
       margin-top: 7px;
 
       font-family: 'Parisienne', cursive;
@@ -185,20 +239,34 @@
     }
 
 
+
     /* =====================================================
        SOBRE
     ===================================================== */
 
     .envelope {
+
       position: absolute;
 
       width: 330px;
+
       height: 220px;
 
       left: 50%;
+
       top: 50%;
 
-      transform: translate(-50%, -42%);
+      transform:
+        translate(-50%, -42%);
+
+      /*
+        IMPORTANTE:
+
+        Permitimos que la tarjeta pueda salir
+        físicamente por la parte superior.
+      */
+
+      overflow: visible;
 
       perspective: 1200px;
 
@@ -209,11 +277,13 @@
     }
 
 
+
     /* =====================================================
-       CUERPO TRASERO DEL SOBRE
+       PARTE TRASERA
     ===================================================== */
 
     .envelope-back {
+
       position: absolute;
 
       inset: 0;
@@ -226,51 +296,62 @@
     }
 
 
+
     /* =====================================================
-       TARJETA
+       TARJETA INTERIOR
     ===================================================== */
 
     .letter {
+
       position: absolute;
 
       width: 270px;
+
       height: 190px;
+
+      /*
+        Centrada dentro del sobre
+      */
 
       left: 30px;
 
       /*
-        Muy abajo inicialmente.
-        Esto hace que quede escondida dentro
-        del cuerpo del sobre.
+        Empieza profundamente dentro
+        del sobre.
       */
-      top: 48px;
+
+      top: 35px;
 
       background: #f8f3e8;
+
+      border:
+        1px solid rgba(100,90,70,.08);
+
+      box-shadow:
+        0 5px 15px rgba(50,50,40,.14);
 
       text-align: center;
 
       padding-top: 45px;
 
-      box-shadow:
-        0 4px 15px rgba(50,50,40,.14);
-
-      border:
-        1px solid rgba(100,90,70,.08);
-
       /*
-        Estado inicial:
-        completamente escondida.
+        La tarjeta SIEMPRE permanece
+        detrás de la parte frontal.
       */
+
+      z-index: 2;
+
       transform:
         translateY(0);
 
       transition:
-        transform 1.35s cubic-bezier(.25,.8,.25,1);
-
-      z-index: 2;
+        transform 1.35s
+        cubic-bezier(.25,.8,.25,1);
     }
 
+
     .letter-small {
+
       font-size: 8px;
 
       letter-spacing: 3px;
@@ -280,18 +361,24 @@
       color: #7c8878;
     }
 
+
     .letter-names {
+
       margin: 7px 0;
 
-      font-family: 'Parisienne', cursive;
+      font-family:
+        'Parisienne', cursive;
 
       font-size: 37px;
 
       color: #555f52;
     }
 
+
     .letter-date {
-      font-family: 'Cormorant Garamond', serif;
+
+      font-family:
+        'Cormorant Garamond', serif;
 
       font-size: 16px;
 
@@ -299,11 +386,22 @@
     }
 
 
+
     /* =====================================================
-       PARTE FRONTAL DEL SOBRE
+       FRENTE DEL SOBRE
+       
+       ESTA ES LA CLAVE DE LA NUEVA ANIMACIÓN.
+       
+       La tarjeta queda detrás.
+       
+       La parte frontal cubre la parte inferior.
+       
+       Cuando la tarjeta sube, empieza a aparecer
+       por encima del borde superior.
     ===================================================== */
 
     .envelope-front {
+
       position: absolute;
 
       inset: 0;
@@ -316,31 +414,24 @@
     }
 
 
-    /* Parte izquierda/derecha */
+    /*
+      Frente inferior del sobre.
+
+      Dejamos libre la zona superior para que,
+      cuando la tarjeta ascienda, pueda verse.
+
+          ┌──────────────┐
+          │   TARJETA    │ ← aparece aquí
+          │              │
+          ├────\  /──────┤
+          │     \/       │
+          │              │
+          │    SOBRE     │
+          └──────────────┘
+    */
 
     .envelope-front::before {
-      content: "";
 
-      position: absolute;
-
-      inset: 0;
-
-      background: #cdb991;
-
-      clip-path:
-        polygon(
-          0 0,
-          50% 52%,
-          100% 0,
-          100% 100%,
-          0 100%
-        );
-    }
-
-
-    /* Triángulo inferior */
-
-    .envelope-front::after {
       content: "";
 
       position: absolute;
@@ -351,11 +442,14 @@
 
       clip-path:
         polygon(
-          0 100%,
-          50% 45%,
-          100% 100%
+          0 45%,
+          50% 5%,
+          100% 45%,
+          100% 100%,
+          0 100%
         );
     }
+
 
 
     /* =====================================================
@@ -363,12 +457,15 @@
     ===================================================== */
 
     .flap {
+
       position: absolute;
 
       top: 0;
+
       left: 0;
 
       width: 100%;
+
       height: 125px;
 
       background: #dfcda9;
@@ -380,18 +477,22 @@
           50% 100%
         );
 
-      transform-origin: top center;
+      transform-origin:
+        top center;
 
       transform:
         rotateX(0deg);
 
       transition:
-        transform 1.15s cubic-bezier(.35,.05,.2,1);
+        transform 1.15s
+        cubic-bezier(.35,.05,.2,1);
 
-      backface-visibility: hidden;
+      backface-visibility:
+        hidden;
 
       z-index: 7;
     }
+
 
 
     /* =====================================================
@@ -399,12 +500,15 @@
     ===================================================== */
 
     .wax {
+
       position: absolute;
 
       width: 64px;
+
       height: 64px;
 
       left: 50%;
+
       top: 101px;
 
       transform:
@@ -413,8 +517,10 @@
       border-radius: 50%;
 
       display: flex;
-      align-items: center;
+
       justify-content: center;
+
+      align-items: center;
 
       background:
         radial-gradient(
@@ -427,7 +533,8 @@
         2px solid rgba(255,255,255,.25);
 
       box-shadow:
-        0 4px 10px rgba(50,40,20,.25);
+        0 4px 10px
+        rgba(50,40,20,.25);
 
       color: #f8efd1;
 
@@ -436,51 +543,68 @@
 
       font-size: 20px;
 
-      transition:
-        transform .55s ease,
-        opacity .55s ease;
-
       z-index: 20;
+
+      transition:
+        transform .6s ease,
+        opacity .6s ease;
     }
 
 
+
     /* =====================================================
-       ANIMACIÓN DE APERTURA
+       APERTURA
     ===================================================== */
 
+
     /*
-      FASE 1:
-      la solapa se abre.
+      PRIMER MOVIMIENTO:
+
+      Se abre la solapa.
     */
 
     .envelope.open .flap {
+
       transform:
         rotateX(180deg);
     }
 
 
+
     /*
-      FASE 2:
-      la carta sube.
+      SEGUNDO MOVIMIENTO:
+
+      La tarjeta sube.
+
+      IMPORTANTE:
+
+      NO cambiamos el z-index.
+
+      Sigue detrás del sobre.
+
+      Por eso da la sensación de salir
+      físicamente desde dentro.
     */
 
     .envelope.open .letter {
+
       transform:
-        translateY(-155px);
+        translateY(-150px);
 
       transition-delay:
         .55s;
-
-      z-index: 8;
     }
 
 
+
     /*
-      FASE 3:
-      desaparece el lacre.
+      TERCER MOVIMIENTO:
+
+      El lacre desaparece.
     */
 
     .envelope.open .wax {
+
       transform:
         translateX(-50%)
         scale(.65)
@@ -493,14 +617,17 @@
     }
 
 
+
     /* =====================================================
        BOTÓN
     ===================================================== */
 
     .open-button {
+
       position: absolute;
 
       left: 50%;
+
       bottom: 11%;
 
       transform:
@@ -527,23 +654,20 @@
 
       cursor: pointer;
 
+      z-index: 40;
+
       transition:
-        opacity .5s ease,
-        background .3s ease,
-        color .3s ease;
-
-      z-index: 30;
+        opacity .5s ease;
     }
 
-    .open-button:hover {
-      background: #555c51;
-      color: white;
-    }
 
     .open-button.hide {
+
       opacity: 0;
+
       pointer-events: none;
     }
+
 
 
     /* =====================================================
@@ -551,6 +675,7 @@
     ===================================================== */
 
     .arrow {
+
       position: absolute;
 
       bottom: 5%;
@@ -566,23 +691,29 @@
         opacity .5s ease;
     }
 
+
     .arrow.hide {
+
       opacity: 0;
     }
+
 
     @keyframes bounce {
 
       0%,
       100% {
+
         transform:
           translateY(0);
       }
 
       50% {
+
         transform:
           translateY(7px);
       }
     }
+
 
 
     /* =====================================================
@@ -590,23 +721,29 @@
     ===================================================== */
 
     .invitation {
+
       display: none;
 
       background:
+
         radial-gradient(
           circle at 10% 10%,
           rgba(255,255,255,.8),
           transparent 30%
         ),
+
         #f4efe4;
     }
 
+
     .invitation.visible {
+
       display: block;
 
       animation:
         invitationAppear 1.3s ease;
     }
+
 
     @keyframes invitationAppear {
 
@@ -620,11 +757,13 @@
     }
 
 
+
     /* =====================================================
        SECCIONES
     ===================================================== */
 
     section {
+
       min-height: 100vh;
 
       padding:
@@ -642,15 +781,14 @@
     }
 
 
-    /* =====================================================
-       INTRO
-    ===================================================== */
-
     .intro {
+
       min-height: 100vh;
     }
 
+
     .eyebrow {
+
       font-size: 9px;
 
       letter-spacing: 4px;
@@ -662,7 +800,9 @@
       margin-bottom: 15px;
     }
 
+
     .names {
+
       font-family:
         'Parisienne', cursive;
 
@@ -676,7 +816,9 @@
       line-height: 1.1;
     }
 
+
     .date {
+
       margin-top: 25px;
 
       font-family:
@@ -689,7 +831,9 @@
       color: #6d715f;
     }
 
+
     .divider {
+
       width: 60px;
 
       height: 1px;
@@ -701,7 +845,9 @@
         #b1a486;
     }
 
+
     .text {
+
       max-width: 330px;
 
       font-family:
@@ -715,11 +861,13 @@
     }
 
 
+
     /* =====================================================
        COUNTDOWN
     ===================================================== */
 
     .countdown {
+
       display: flex;
 
       gap: 12px;
@@ -727,11 +875,15 @@
       margin-top: 30px;
     }
 
+
     .count-box {
+
       width: 65px;
     }
 
+
     .count-number {
+
       font-family:
         'Cormorant Garamond', serif;
 
@@ -740,7 +892,9 @@
       color: #596253;
     }
 
+
     .count-label {
+
       font-size: 7px;
 
       letter-spacing: 1px;
@@ -751,21 +905,27 @@
     }
 
 
+
     /* =====================================================
-       SECCIONES
+       SECCIONES DE INFORMACIÓN
     ===================================================== */
 
     .green {
+
       background:
         #dfe4d8;
     }
 
+
     .gold {
+
       background:
         #e8dfcb;
     }
 
+
     .section-title {
+
       font-family:
         'Cormorant Garamond', serif;
 
@@ -778,7 +938,9 @@
       margin-bottom: 20px;
     }
 
+
     .info-card {
+
       width: 100%;
 
       max-width: 360px;
@@ -787,7 +949,8 @@
         35px 25px;
 
       border:
-        1px solid rgba(90,90,70,.2);
+        1px solid
+        rgba(90,90,70,.2);
 
       background:
         rgba(255,255,255,.25);
@@ -795,7 +958,9 @@
       margin-top: 20px;
     }
 
+
     .info-card h3 {
+
       font-family:
         'Cormorant Garamond', serif;
 
@@ -806,7 +971,9 @@
       margin-bottom: 10px;
     }
 
+
     .info-card p {
+
       font-size: 12px;
 
       line-height: 1.8;
@@ -814,7 +981,9 @@
       color: #62675e;
     }
 
+
     .calendar-button {
+
       margin-top: 25px;
 
       padding:
@@ -837,11 +1006,13 @@
     }
 
 
+
     /* =====================================================
        FOOTER
     ===================================================== */
 
     footer {
+
       padding:
         60px 20px;
 
@@ -854,14 +1025,18 @@
         #eee8dc;
     }
 
+
     footer .footer-names {
+
       font-family:
         'Parisienne', cursive;
 
       font-size: 42px;
     }
 
+
     footer p {
+
       margin-top: 15px;
 
       font-size: 9px;
@@ -872,41 +1047,49 @@
     }
 
 
+
     /* =====================================================
-       AJUSTES MÓVIL
+       MÓVILES PEQUEÑOS
     ===================================================== */
 
     @media (max-width: 360px) {
 
       .envelope {
+
         width: 300px;
+
         height: 200px;
       }
 
+
       .letter {
+
         width: 244px;
+
         height: 170px;
+
         left: 28px;
       }
 
+
       .opening-title h1 {
+
         font-size: 43px;
       }
 
-      .open-button {
-        bottom: 10%;
-      }
     }
 
   </style>
+
 </head>
 
 
 <body>
 
 
+
   <!-- ===================================================
-       SOBRE
+       SOBRE INICIAL
   ==================================================== -->
 
   <div
@@ -914,19 +1097,28 @@
     id="opening"
   >
 
+
     <div class="paper">
 
 
-      <!-- Decoración provisional -->
+      <!-- Flores provisionales -->
 
-      <div class="flower top"></div>
+      <div
+        class="flower top"
+      ></div>
 
-      <div class="flower bottom"></div>
+
+      <div
+        class="flower bottom"
+      ></div>
+
 
 
       <!-- Título -->
 
-      <div class="opening-title">
+      <div
+        class="opening-title"
+      >
 
         <p>
           La nostra història
@@ -939,7 +1131,10 @@
       </div>
 
 
-      <!-- SOBRE -->
+
+      <!-- =================================================
+           SOBRE
+      ================================================== -->
 
       <div
         class="envelope"
@@ -947,39 +1142,55 @@
       >
 
 
-        <!-- Fondo -->
+        <!-- Parte posterior -->
 
         <div
           class="envelope-back"
         ></div>
 
 
-        <!-- CARTA -->
+
+        <!-- =================================================
+             TARJETA
+
+             IMPORTANTE:
+             queda detrás del frontal.
+        ================================================== -->
 
         <div
           class="letter"
         >
 
-          <div class="letter-small">
+          <div
+            class="letter-small"
+          >
             El nostre casament
           </div>
 
-          <div class="letter-names">
+
+          <div
+            class="letter-names"
+          >
             David & Montse
           </div>
 
-          <div class="letter-date">
+
+          <div
+            class="letter-date"
+          >
             07 · 05 · 2027
           </div>
 
         </div>
 
 
-        <!-- Frente del sobre -->
+
+        <!-- Frente -->
 
         <div
           class="envelope-front"
         ></div>
+
 
 
         <!-- Solapa -->
@@ -987,6 +1198,7 @@
         <div
           class="flap"
         ></div>
+
 
 
         <!-- Lacre -->
@@ -1001,6 +1213,7 @@
       </div>
 
 
+
       <!-- Botón -->
 
       <button
@@ -1011,6 +1224,7 @@
       </button>
 
 
+
       <!-- Flecha -->
 
       <div
@@ -1019,6 +1233,7 @@
       >
         ↓
       </div>
+
 
     </div>
 
@@ -1036,6 +1251,7 @@
   >
 
 
+
     <!-- INTRO -->
 
     <section
@@ -1046,13 +1262,16 @@
         Ens casem!
       </div>
 
+
       <h1 class="names">
 
         David
 
         <br>
 
-        <span>&</span>
+        <span>
+          &
+        </span>
 
         <br>
 
@@ -1060,19 +1279,26 @@
 
       </h1>
 
-      <div class="divider"></div>
+
+      <div
+        class="divider"
+      ></div>
+
 
       <div class="date">
         07 DE MAIG DE 2027
       </div>
 
+
       <p
         class="text"
         style="margin-top:35px;"
       >
+
         Hi ha moments a la vida
         que mereixen ser compartits.
         I aquest és un d'ells.
+
       </p>
 
     </section>
@@ -1081,17 +1307,25 @@
 
     <!-- COUNTDOWN -->
 
-    <section class="green">
+    <section
+      class="green"
+    >
 
       <div class="eyebrow">
         Guarda la data
       </div>
 
-      <h2 class="section-title">
+
+      <h2
+        class="section-title"
+      >
         Comença el compte enrere
       </h2>
 
-      <div class="countdown">
+
+      <div
+        class="countdown"
+      >
 
 
         <div class="count-box">
@@ -1103,11 +1337,14 @@
             --
           </div>
 
-          <div class="count-label">
+          <div
+            class="count-label"
+          >
             Dies
           </div>
 
         </div>
+
 
 
         <div class="count-box">
@@ -1119,11 +1356,14 @@
             --
           </div>
 
-          <div class="count-label">
+          <div
+            class="count-label"
+          >
             Hores
           </div>
 
         </div>
+
 
 
         <div class="count-box">
@@ -1135,11 +1375,14 @@
             --
           </div>
 
-          <div class="count-label">
+          <div
+            class="count-label"
+          >
             Minuts
           </div>
 
         </div>
+
 
 
         <div class="count-box">
@@ -1151,7 +1394,9 @@
             --
           </div>
 
-          <div class="count-label">
+          <div
+            class="count-label"
+          >
             Segons
           </div>
 
@@ -1179,28 +1424,47 @@
         El gran dia
       </div>
 
-      <h2 class="section-title">
+
+      <h2
+        class="section-title"
+      >
         La cerimònia
       </h2>
 
-      <div class="info-card">
+
+      <div
+        class="info-card"
+      >
 
         <h3>
           07 de maig de 2027
         </h3>
 
+
         <p>
+
           Cerimònia
+
           <br>
+
           17:00 h
+
         </p>
 
-        <div class="divider"></div>
+
+        <div
+          class="divider"
+        ></div>
+
 
         <p>
+
           Properament us explicarem
+
           <br>
+
           tots els detalls del lloc.
+
         </p>
 
       </div>
@@ -1211,26 +1475,37 @@
 
     <!-- CELEBRACIÓN -->
 
-    <section class="gold">
+    <section
+      class="gold"
+    >
 
       <div class="eyebrow">
         I després...
       </div>
 
-      <h2 class="section-title">
+
+      <h2
+        class="section-title"
+      >
         La celebració
       </h2>
 
-      <div class="info-card">
+
+      <div
+        class="info-card"
+      >
 
         <h3>
           Brindem per nosaltres
         </h3>
 
+
         <p>
+
           Després de la cerimònia,
           celebrarem aquest dia tan especial
           amb totes les persones que estimem.
+
         </p>
 
       </div>
@@ -1241,22 +1516,34 @@
 
     <!-- CONFIRMACIÓN -->
 
-    <section class="green">
+    <section
+      class="green"
+    >
 
       <div class="eyebrow">
         Us esperem
       </div>
 
-      <h2 class="section-title">
+
+      <h2
+        class="section-title"
+      >
         Voleu acompanyar-nos?
       </h2>
 
+
       <p class="text">
-        La vostra presència és el millor regal
+
+        La vostra presència és
+        el millor regal
         que podríem tenir.
+
       </p>
 
-      <button class="calendar-button">
+
+      <button
+        class="calendar-button"
+      >
         CONFIRMAR ASSISTÈNCIA
       </button>
 
@@ -1268,9 +1555,12 @@
 
     <footer>
 
-      <div class="footer-names">
+      <div
+        class="footer-names"
+      >
         David & Montse
       </div>
+
 
       <p>
         07 · 05 · 2027
@@ -1291,24 +1581,43 @@
 
 
     /* =================================================
-       APERTURA DEL SOBRE
+       ELEMENTOS
     ================================================= */
 
     const openButton =
-      document.getElementById("openButton");
+      document.getElementById(
+        "openButton"
+      );
+
 
     const envelope =
-      document.getElementById("envelope");
+      document.getElementById(
+        "envelope"
+      );
+
 
     const opening =
-      document.getElementById("opening");
+      document.getElementById(
+        "opening"
+      );
+
 
     const invitation =
-      document.getElementById("invitation");
+      document.getElementById(
+        "invitation"
+      );
+
 
     const arrow =
-      document.getElementById("arrow");
+      document.getElementById(
+        "arrow"
+      );
 
+
+
+    /* =================================================
+       APERTURA
+    ================================================= */
 
     openButton.addEventListener(
       "click",
@@ -1316,20 +1625,26 @@
 
 
         /*
-          Ocultamos controles.
+          Ocultamos botón y flecha.
         */
 
-        openButton.classList.add("hide");
+        openButton.classList.add(
+          "hide"
+        );
 
-        arrow.classList.add("hide");
+
+        arrow.classList.add(
+          "hide"
+        );
 
 
         /*
-          Iniciamos la animación
-          del sobre.
+          Iniciamos la secuencia.
         */
 
-        envelope.classList.add("open");
+        envelope.classList.add(
+          "open"
+        );
 
 
         /*
@@ -1340,10 +1655,14 @@
         setTimeout(
           function () {
 
+            opening.classList.add(
+              "hidden"
+            );
 
-            opening.classList.add("hidden");
 
-            invitation.classList.add("visible");
+            invitation.classList.add(
+              "visible"
+            );
 
 
             window.scrollTo(
@@ -1351,9 +1670,9 @@
               0
             );
 
-
           },
-          2300
+
+          2600
         );
 
       }
@@ -1382,75 +1701,102 @@
         weddingDate - now;
 
 
-      if (difference <= 0) {
+      if (
+        difference <= 0
+      ) {
 
         document.getElementById(
           "days"
         ).textContent = "0";
 
+
         document.getElementById(
           "hours"
         ).textContent = "0";
+
 
         document.getElementById(
           "minutes"
         ).textContent = "0";
 
+
         document.getElementById(
           "seconds"
         ).textContent = "0";
 
-        return;
 
+        return;
       }
 
 
       const days =
         Math.floor(
           difference /
-          (1000 * 60 * 60 * 24)
+          (
+            1000 *
+            60 *
+            60 *
+            24
+          )
         );
 
 
       const hours =
         Math.floor(
-          (difference /
-            (1000 * 60 * 60)) % 24
+          (
+            difference /
+            (
+              1000 *
+              60 *
+              60
+            )
+          ) % 24
         );
 
 
       const minutes =
         Math.floor(
-          (difference /
-            (1000 * 60)) % 60
+          (
+            difference /
+            (
+              1000 *
+              60
+            )
+          ) % 60
         );
 
 
       const seconds =
         Math.floor(
-          (difference /
-            1000) % 60
+          (
+            difference /
+            1000
+          ) % 60
         );
 
 
       document.getElementById(
         "days"
-      ).textContent = days;
+      ).textContent =
+        days;
 
 
       document.getElementById(
         "hours"
-      ).textContent = hours;
+      ).textContent =
+        hours;
 
 
       document.getElementById(
         "minutes"
-      ).textContent = minutes;
+      ).textContent =
+        minutes;
 
 
       document.getElementById(
         "seconds"
-      ).textContent = seconds;
+      ).textContent =
+        seconds;
 
     }
 
@@ -1466,5 +1812,7 @@
 
   </script>
 
+
 </body>
+
 </html>
