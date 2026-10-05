@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html lang="ca">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>
-    David & Montse · 07 de maig de 2027
-  </title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David & Montse — 07 de maig de 2027</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
 
-    @import url(
-      'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap'
-    );
-
-
-    /* =====================================================
-       BASE
-    ===================================================== */
+    :root {
+      --ivory: #f6f1e7;
+      --paper: #f8f4eb;
+      --sage: #7f8d79;
+      --sage-dark: #596554;
+      --blush: #d8aaa1;
+      --gold: #b89a61;
+      --gold-dark: #927643;
+      --ink: #3f403b;
+      --soft: #ebe4d7;
+    }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
@@ -37,1782 +29,1127 @@
     }
 
     body {
-      background: #eee8dc;
-      color: #4f594d;
-      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      background: var(--ivory);
+      color: var(--ink);
+      font-family: "Montserrat", sans-serif;
       overflow-x: hidden;
     }
 
+    /* =========================================================
+       PANTALLA INICIAL
+    ========================================================= */
 
-    /* =====================================================
-       PANTALLA DE APERTURA
-    ===================================================== */
-
-    .opening {
-
+    .opening-screen {
       position: fixed;
-
       inset: 0;
-
-      z-index: 1000;
-
+      z-index: 100;
       display: flex;
-
-      justify-content: center;
-
       align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(216,170,161,.13), transparent 28%),
+        radial-gradient(circle at 80% 75%, rgba(127,141,121,.12), transparent 30%),
+        var(--ivory);
+      transition:
+        opacity 1s ease,
+        visibility 1s ease;
+    }
+
+    .opening-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .opening-content {
+      width: 100%;
+      max-width: 500px;
+      min-height: 100vh;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .opening-intro {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .opening-small {
+      margin: 0 0 10px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+    }
+
+    .opening-names {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(48px, 13vw, 72px);
+      font-weight: 400;
+      color: var(--sage-dark);
+      line-height: .95;
+    }
+
+    .opening-date {
+      margin-top: 14px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 19px;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+    }
+
+    /* =========================================================
+       FLORES PROVISIONALES
+    ========================================================= */
+
+    .flower {
+      position: absolute;
+      width: 70px;
+      height: 110px;
+      pointer-events: none;
+      opacity: .75;
+    }
+
+    .flower-left {
+      left: 0;
+      top: 15%;
+      transform: rotate(-18deg);
+    }
+
+    .flower-right {
+      right: 0;
+      bottom: 14%;
+      transform: rotate(22deg) scaleX(-1);
+    }
+
+    .stem {
+      position: absolute;
+      width: 2px;
+      height: 105px;
+      background: var(--sage);
+      left: 35px;
+      top: 10px;
+      transform: rotate(16deg);
+      transform-origin: bottom;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 28px;
+      height: 13px;
+      border-radius: 100% 0 100% 0;
+      background: var(--sage);
+    }
+
+    .leaf.one {
+      left: 18px;
+      top: 62px;
+      transform: rotate(28deg);
+    }
+
+    .leaf.two {
+      left: 36px;
+      top: 48px;
+      transform: rotate(-32deg);
+    }
+
+    .petal {
+      position: absolute;
+      width: 24px;
+      height: 35px;
+      border-radius: 70% 70% 50% 50%;
+      background: var(--blush);
+      left: 20px;
+      top: 0;
+      transform-origin: 50% 100%;
+    }
+
+    .petal.p1 {
+      transform: rotate(-42deg);
+    }
+
+    .petal.p2 {
+      transform: rotate(0deg);
+    }
+
+    .petal.p3 {
+      transform: rotate(42deg);
+    }
+
+    .flower-center {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      left: 25px;
+      top: 22px;
+    }
+
+    /* =========================================================
+       SOBRE
+    ========================================================= */
+
+    .envelope-wrapper {
+      position: relative;
+      width: 330px;
+      height: 390px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .envelope {
+      position: relative;
+      width: 330px;
+      height: 220px;
+      perspective: 1200px;
+    }
+
+    /*
+      BASE TRASERA DEL SOBRE
+    */
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(
+          135deg,
+          #d9c8a8 0%,
+          #cfbc98 50%,
+          #c7b28c 100%
+        );
+      border-radius: 3px;
+      box-shadow:
+        0 18px 35px rgba(70, 65, 52, .16),
+        0 4px 8px rgba(70, 65, 52, .10);
+    }
+
+    /*
+      TARJETA
+
+      IMPORTANTE:
+      La tarjeta comienza MUY abajo.
+      El bolsillo frontal del sobre la tapa completamente.
+    */
+
+    .letter {
+      position: absolute;
+      z-index: 2;
+
+      width: 270px;
+      height: 190px;
+
+      left: 30px;
+      top: 82px;
+
+      padding: 25px 18px;
 
       background:
+        linear-gradient(
+          135deg,
+          #faf7ef 0%,
+          #f4eee2 100%
+        );
 
+      border: 1px solid rgba(140, 120, 85, .16);
+
+      box-shadow:
+        0 10px 22px rgba(60, 55, 45, .12);
+
+      text-align: center;
+
+      transition:
+        transform 1.35s cubic-bezier(.22,.75,.18,1);
+
+      transform: translateY(0);
+    }
+
+    .letter-small {
+      font-size: 7px;
+      letter-spacing: 3px;
+      color: var(--sage-dark);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .letter-names {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-size: 39px;
+      font-weight: 400;
+      color: var(--sage-dark);
+      line-height: 1;
+    }
+
+    .letter-date {
+      margin-top: 11px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      color: var(--gold-dark);
+    }
+
+    /*
+      BOLSILLO FRONTAL
+
+      Este elemento tapa físicamente la tarjeta mientras está dentro.
+      Tiene una abertura superior en forma de V.
+    */
+
+    .envelope-pocket {
+      position: absolute;
+      z-index: 5;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      height: 160px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #d8c5a4 0%,
+          #cfbc99 50%,
+          #c5b089 100%
+        );
+
+      clip-path: polygon(
+        0 28%,
+        50% 0,
+        100% 28%,
+        100% 100%,
+        0 100%
+      );
+
+      box-shadow:
+        0 -1px 0 rgba(120, 100, 70, .08);
+    }
+
+    /*
+      LÍNEAS LATERALES DECORATIVAS DEL SOBRE
+    */
+
+    .envelope-side-left,
+    .envelope-side-right {
+      position: absolute;
+      z-index: 6;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      pointer-events: none;
+    }
+
+    .envelope-side-left {
+      left: 0;
+      border-width: 0 0 220px 165px;
+      border-color: transparent transparent rgba(213,195,161,.72) transparent;
+    }
+
+    .envelope-side-right {
+      right: 0;
+      border-width: 220px 0 0 165px;
+      border-color: transparent transparent transparent rgba(203,182,145,.60);
+    }
+
+    /*
+      SOLAPA SUPERIOR
+
+      Cerrada al principio.
+      Se abre al pulsar.
+    */
+
+    .flap {
+      position: absolute;
+      z-index: 8;
+
+      left: 0;
+      top: 0;
+
+      width: 0;
+      height: 0;
+
+      border-left: 165px solid transparent;
+      border-right: 165px solid transparent;
+      border-top: 125px solid #dfcfaf;
+
+      transform-origin: 50% 0%;
+      transform: rotateX(0deg);
+
+      transition:
+        transform 1s cubic-bezier(.25,.8,.2,1);
+
+      filter: drop-shadow(0 2px 2px rgba(70,60,45,.10));
+
+      backface-visibility: hidden;
+    }
+
+    /*
+      SELLO DE CERA
+    */
+
+    .wax {
+      position: absolute;
+      z-index: 20;
+
+      left: 50%;
+      top: 103px;
+
+      width: 58px;
+      height: 58px;
+
+      transform: translateX(-50%);
+
+      border-radius: 50%;
+
+      background:
         radial-gradient(
-          circle at 20% 15%,
-          rgba(255,255,255,.75),
-          transparent 30%
-        ),
+          circle at 35% 30%,
+          #d1b376 0%,
+          #b79555 48%,
+          #96743d 100%
+        );
 
-        radial-gradient(
-          circle at 80% 85%,
-          rgba(190,180,150,.16),
-          transparent 35%
-        ),
+      border: 2px solid rgba(125, 95, 48, .35);
 
-        #eee8dc;
+      box-shadow:
+        0 4px 8px rgba(60,50,35,.18),
+        inset 0 2px 3px rgba(255,255,255,.25);
 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        opacity .55s ease,
+        transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .wax::after {
+      content: "D · M";
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(82,61,31,.8);
+    }
+
+    /*
+      ESTADO ABIERTO
+    */
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope.open .letter {
+      transform: translateY(-175px);
+      transition-delay: .55s;
+    }
+
+    .envelope.open .wax {
+      opacity: 0;
+      transform:
+        translateX(-50%)
+        scale(.65)
+        rotate(15deg);
+      transition-delay: .15s;
+    }
+
+    /* =========================================================
+       BOTÓN
+    ========================================================= */
+
+    .open-button {
+      margin-top: 35px;
+
+      padding: 15px 27px;
+
+      border: 1px solid rgba(145, 119, 72, .55);
+      background: rgba(248,244,235,.72);
+
+      color: var(--sage-dark);
+
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .open-button:hover {
+      background: var(--sage-dark);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(60,70,55,.12);
+    }
+
+    .open-button:active {
+      transform: translateY(0);
+    }
+
+    .opening-hint {
+      margin-top: 14px;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: #888477;
+    }
+
+    /* =========================================================
+       INVITACIÓ
+    ========================================================= */
+
+    .invitation {
+      opacity: 0;
+      visibility: hidden;
       transition:
         opacity 1.2s ease,
         visibility 1.2s ease;
     }
 
-
-    .opening.hidden {
-
-      opacity: 0;
-
-      visibility: hidden;
-
-      pointer-events: none;
-    }
-
-
-    .paper {
-
-      position: relative;
-
-      width: min(100vw, 480px);
-
-      height: 100vh;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      overflow: hidden;
-    }
-
-
-
-    /* =====================================================
-       DECORACIÓN PROVISIONAL
-    ===================================================== */
-
-    .flower {
-
-      position: absolute;
-
-      width: 110px;
-
-      height: 110px;
-
-      opacity: .75;
-
-      pointer-events: none;
-    }
-
-
-    .flower::before,
-    .flower::after {
-
-      content: "";
-
-      position: absolute;
-
-      border-radius: 50%;
-    }
-
-
-    .flower::before {
-
-      width: 75px;
-
-      height: 38px;
-
-      background: #a9b5a0;
-
-      transform: rotate(35deg);
-
-      top: 25px;
-
-      left: 10px;
-    }
-
-
-    .flower::after {
-
-      width: 58px;
-
-      height: 32px;
-
-      background: #d4b4ae;
-
-      transform: rotate(-30deg);
-
-      top: 48px;
-
-      left: 43px;
-    }
-
-
-    .flower.top {
-
-      top: 15px;
-
-      left: -30px;
-
-      transform: rotate(-20deg);
-    }
-
-
-    .flower.bottom {
-
-      right: -25px;
-
-      bottom: 20px;
-
-      transform: rotate(160deg);
-    }
-
-
-
-    /* =====================================================
-       TÍTULO
-    ===================================================== */
-
-    .opening-title {
-
-      position: absolute;
-
-      top: 9%;
-
-      width: 100%;
-
-      text-align: center;
-
-      z-index: 30;
-    }
-
-
-    .opening-title p {
-
-      font-size: 9px;
-
-      letter-spacing: 4px;
-
-      text-transform: uppercase;
-
-      color: #76806f;
-    }
-
-
-    .opening-title h1 {
-
-      margin-top: 7px;
-
-      font-family: 'Parisienne', cursive;
-
-      font-size: 50px;
-
-      font-weight: 400;
-
-      color: #4f594d;
-    }
-
-
-
-    /* =====================================================
-       SOBRE
-    ===================================================== */
-
-    .envelope {
-
-      position: absolute;
-
-      width: 330px;
-
-      height: 220px;
-
-      left: 50%;
-
-      top: 50%;
-
-      transform:
-        translate(-50%, -42%);
-
-      /*
-        IMPORTANTE:
-
-        Permitimos que la tarjeta pueda salir
-        físicamente por la parte superior.
-      */
-
-      overflow: visible;
-
-      perspective: 1200px;
-
-      filter:
-        drop-shadow(
-          0 18px 22px rgba(70,65,55,.18)
-        );
-    }
-
-
-
-    /* =====================================================
-       PARTE TRASERA
-    ===================================================== */
-
-    .envelope-back {
-
-      position: absolute;
-
-      inset: 0;
-
-      background: #d9c8a9;
-
-      border-radius: 3px;
-
-      z-index: 1;
-    }
-
-
-
-    /* =====================================================
-       TARJETA INTERIOR
-    ===================================================== */
-
-    .letter {
-
-      position: absolute;
-
-      width: 270px;
-
-      height: 190px;
-
-      /*
-        Centrada dentro del sobre
-      */
-
-      left: 30px;
-
-      /*
-        Empieza profundamente dentro
-        del sobre.
-      */
-
-      top: 35px;
-
-      background: #f8f3e8;
-
-      border:
-        1px solid rgba(100,90,70,.08);
-
-      box-shadow:
-        0 5px 15px rgba(50,50,40,.14);
-
-      text-align: center;
-
-      padding-top: 45px;
-
-      /*
-        La tarjeta SIEMPRE permanece
-        detrás de la parte frontal.
-      */
-
-      z-index: 2;
-
-      transform:
-        translateY(0);
-
-      transition:
-        transform 1.35s
-        cubic-bezier(.25,.8,.25,1);
-    }
-
-
-    .letter-small {
-
-      font-size: 8px;
-
-      letter-spacing: 3px;
-
-      text-transform: uppercase;
-
-      color: #7c8878;
-    }
-
-
-    .letter-names {
-
-      margin: 7px 0;
-
-      font-family:
-        'Parisienne', cursive;
-
-      font-size: 37px;
-
-      color: #555f52;
-    }
-
-
-    .letter-date {
-
-      font-family:
-        'Cormorant Garamond', serif;
-
-      font-size: 16px;
-
-      letter-spacing: 2px;
-    }
-
-
-
-    /* =====================================================
-       FRENTE DEL SOBRE
-       
-       ESTA ES LA CLAVE DE LA NUEVA ANIMACIÓN.
-       
-       La tarjeta queda detrás.
-       
-       La parte frontal cubre la parte inferior.
-       
-       Cuando la tarjeta sube, empieza a aparecer
-       por encima del borde superior.
-    ===================================================== */
-
-    .envelope-front {
-
-      position: absolute;
-
-      inset: 0;
-
-      z-index: 5;
-
-      pointer-events: none;
-
-      overflow: hidden;
-    }
-
-
-    /*
-      Frente inferior del sobre.
-
-      Dejamos libre la zona superior para que,
-      cuando la tarjeta ascienda, pueda verse.
-
-          ┌──────────────┐
-          │   TARJETA    │ ← aparece aquí
-          │              │
-          ├────\  /──────┤
-          │     \/       │
-          │              │
-          │    SOBRE     │
-          └──────────────┘
-    */
-
-    .envelope-front::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background: #d5c19b;
-
-      clip-path:
-        polygon(
-          0 45%,
-          50% 5%,
-          100% 45%,
-          100% 100%,
-          0 100%
-        );
-    }
-
-
-
-    /* =====================================================
-       SOLAPA SUPERIOR
-    ===================================================== */
-
-    .flap {
-
-      position: absolute;
-
-      top: 0;
-
-      left: 0;
-
-      width: 100%;
-
-      height: 125px;
-
-      background: #dfcda9;
-
-      clip-path:
-        polygon(
-          0 0,
-          100% 0,
-          50% 100%
-        );
-
-      transform-origin:
-        top center;
-
-      transform:
-        rotateX(0deg);
-
-      transition:
-        transform 1.15s
-        cubic-bezier(.35,.05,.2,1);
-
-      backface-visibility:
-        hidden;
-
-      z-index: 7;
-    }
-
-
-
-    /* =====================================================
-       LACRE
-    ===================================================== */
-
-    .wax {
-
-      position: absolute;
-
-      width: 64px;
-
-      height: 64px;
-
-      left: 50%;
-
-      top: 101px;
-
-      transform:
-        translateX(-50%);
-
-      border-radius: 50%;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      background:
-        radial-gradient(
-          circle at 35% 30%,
-          #cbb36d,
-          #9b7b35
-        );
-
-      border:
-        2px solid rgba(255,255,255,.25);
-
-      box-shadow:
-        0 4px 10px
-        rgba(50,40,20,.25);
-
-      color: #f8efd1;
-
-      font-family:
-        'Cormorant Garamond', serif;
-
-      font-size: 20px;
-
-      z-index: 20;
-
-      transition:
-        transform .6s ease,
-        opacity .6s ease;
-    }
-
-
-
-    /* =====================================================
-       APERTURA
-    ===================================================== */
-
-
-    /*
-      PRIMER MOVIMIENTO:
-
-      Se abre la solapa.
-    */
-
-    .envelope.open .flap {
-
-      transform:
-        rotateX(180deg);
-    }
-
-
-
-    /*
-      SEGUNDO MOVIMIENTO:
-
-      La tarjeta sube.
-
-      IMPORTANTE:
-
-      NO cambiamos el z-index.
-
-      Sigue detrás del sobre.
-
-      Por eso da la sensación de salir
-      físicamente desde dentro.
-    */
-
-    .envelope.open .letter {
-
-      transform:
-        translateY(-150px);
-
-      transition-delay:
-        .55s;
-    }
-
-
-
-    /*
-      TERCER MOVIMIENTO:
-
-      El lacre desaparece.
-    */
-
-    .envelope.open .wax {
-
-      transform:
-        translateX(-50%)
-        scale(.65)
-        rotate(18deg);
-
-      opacity: 0;
-
-      transition-delay:
-        .15s;
-    }
-
-
-
-    /* =====================================================
-       BOTÓN
-    ===================================================== */
-
-    .open-button {
-
-      position: absolute;
-
-      left: 50%;
-
-      bottom: 11%;
-
-      transform:
-        translateX(-50%);
-
-      padding:
-        14px 27px;
-
-      border:
-        1px solid #9d947b;
-
-      background:
-        rgba(248,243,232,.65);
-
-      color:
-        #555c51;
-
-      font-family:
-        'Montserrat', sans-serif;
-
-      font-size: 10px;
-
-      letter-spacing: 2px;
-
-      cursor: pointer;
-
-      z-index: 40;
-
-      transition:
-        opacity .5s ease;
-    }
-
-
-    .open-button.hide {
-
-      opacity: 0;
-
-      pointer-events: none;
-    }
-
-
-
-    /* =====================================================
-       FLECHA
-    ===================================================== */
-
-    .arrow {
-
-      position: absolute;
-
-      bottom: 5%;
-
-      font-size: 20px;
-
-      color: #817b68;
-
-      animation:
-        bounce 1.7s infinite;
-
-      transition:
-        opacity .5s ease;
-    }
-
-
-    .arrow.hide {
-
-      opacity: 0;
-    }
-
-
-    @keyframes bounce {
-
-      0%,
-      100% {
-
-        transform:
-          translateY(0);
-      }
-
-      50% {
-
-        transform:
-          translateY(7px);
-      }
-    }
-
-
-
-    /* =====================================================
-       INVITACIÓN
-    ===================================================== */
-
-    .invitation {
-
-      display: none;
-
-      background:
-
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(255,255,255,.8),
-          transparent 30%
-        ),
-
-        #f4efe4;
-    }
-
-
     .invitation.visible {
-
-      display: block;
-
-      animation:
-        invitationAppear 1.3s ease;
+      opacity: 1;
+      visibility: visible;
     }
 
-
-    @keyframes invitationAppear {
-
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-
-
-    /* =====================================================
-       SECCIONES
-    ===================================================== */
-
-    section {
-
+    .section {
       min-height: 100vh;
-
-      padding:
-        80px 25px;
-
+      padding: 90px 24px;
       display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
       align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
 
+    .section-inner {
+      width: 100%;
+      max-width: 650px;
       text-align: center;
     }
-
-
-    .intro {
-
-      min-height: 100vh;
-    }
-
 
     .eyebrow {
-
-      font-size: 9px;
-
+      font-size: 10px;
       letter-spacing: 4px;
-
       text-transform: uppercase;
-
-      color: #87917f;
-
-      margin-bottom: 15px;
+      color: var(--sage-dark);
+      margin-bottom: 18px;
     }
 
-
-    .names {
-
-      font-family:
-        'Parisienne', cursive;
-
-      font-size:
-        clamp(55px, 16vw, 80px);
-
+    .hero-names {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(65px, 17vw, 105px);
       font-weight: 400;
-
-      color: #4d584c;
-
-      line-height: 1.1;
+      line-height: .9;
+      color: var(--sage-dark);
     }
 
-
-    .date {
-
+    .hero-date {
       margin-top: 25px;
-
-      font-family:
-        'Cormorant Garamond', serif;
-
-      font-size: 23px;
-
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
       letter-spacing: 3px;
-
-      color: #6d715f;
+      color: var(--gold-dark);
     }
-
 
     .divider {
-
-      width: 60px;
-
+      width: 70px;
       height: 1px;
-
-      margin:
-        30px auto;
-
-      background:
-        #b1a486;
+      background: var(--gold);
+      margin: 28px auto;
     }
 
-
-    .text {
-
-      max-width: 330px;
-
-      font-family:
-        'Cormorant Garamond', serif;
-
+    .intro-text {
+      max-width: 520px;
+      margin: auto;
+      font-family: "Cormorant Garamond", serif;
       font-size: 21px;
-
-      line-height: 1.55;
-
-      color: #5e6258;
+      line-height: 1.6;
+      color: #575850;
     }
 
-
-
-    /* =====================================================
+    /* =========================================================
        COUNTDOWN
-    ===================================================== */
+    ========================================================= */
+
+    .countdown-section {
+      background: rgba(255,255,255,.25);
+    }
 
     .countdown {
-
-      display: flex;
-
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-
-      margin-top: 30px;
+      max-width: 500px;
+      margin: 35px auto 0;
     }
 
-
-    .count-box {
-
-      width: 65px;
+    .countdown-item {
+      padding: 18px 8px;
+      border-top: 1px solid rgba(184,154,97,.45);
+      border-bottom: 1px solid rgba(184,154,97,.45);
     }
 
-
-    .count-number {
-
-      font-family:
-        'Cormorant Garamond', serif;
-
-      font-size: 32px;
-
-      color: #596253;
+    .countdown-number {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 34px;
+      color: var(--sage-dark);
     }
 
-
-    .count-label {
-
-      font-size: 7px;
-
-      letter-spacing: 1px;
-
+    .countdown-label {
+      display: block;
+      margin-top: 5px;
+      font-size: 8px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-
-      color: #8c8b7a;
+      color: #85857c;
     }
 
+    /* =========================================================
+       DETALLS
+    ========================================================= */
 
-
-    /* =====================================================
-       SECCIONES DE INFORMACIÓN
-    ===================================================== */
-
-    .green {
-
-      background:
-        #dfe4d8;
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      margin-top: 35px;
     }
 
-
-    .gold {
-
-      background:
-        #e8dfcb;
+    .detail-card {
+      padding: 30px 22px;
+      border: 1px solid rgba(184,154,97,.30);
+      background: rgba(255,255,255,.30);
     }
 
-
-    .section-title {
-
-      font-family:
-        'Cormorant Garamond', serif;
-
-      font-size: 45px;
-
-      font-weight: 400;
-
-      color: #4f594d;
-
-      margin-bottom: 20px;
-    }
-
-
-    .info-card {
-
-      width: 100%;
-
-      max-width: 360px;
-
-      padding:
-        35px 25px;
-
-      border:
-        1px solid
-        rgba(90,90,70,.2);
-
-      background:
-        rgba(255,255,255,.25);
-
-      margin-top: 20px;
-    }
-
-
-    .info-card h3 {
-
-      font-family:
-        'Cormorant Garamond', serif;
-
-      font-size: 26px;
-
-      font-weight: 500;
-
+    .detail-icon {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px;
+      color: var(--gold-dark);
       margin-bottom: 10px;
     }
 
-
-    .info-card p {
-
-      font-size: 12px;
-
-      line-height: 1.8;
-
-      color: #62675e;
+    .detail-title {
+      margin: 0 0 8px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      font-weight: 600;
+      color: var(--sage-dark);
     }
 
+    .detail-text {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 18px;
+      line-height: 1.5;
+      color: #64655d;
+    }
+
+    /* =========================================================
+       CALENDARI
+    ========================================================= */
 
     .calendar-button {
-
+      display: inline-block;
       margin-top: 25px;
-
-      padding:
-        14px 22px;
-
-      border:
-        1px solid #8d927f;
-
-      background:
-        transparent;
-
-      color:
-        #596052;
-
+      padding: 14px 24px;
+      border: 1px solid var(--gold);
+      color: var(--sage-dark);
+      text-decoration: none;
       font-size: 9px;
-
       letter-spacing: 2px;
-
       text-transform: uppercase;
     }
 
+    /* =========================================================
+       RSVP
+    ========================================================= */
 
+    .rsvp-box {
+      margin-top: 30px;
+      padding: 35px 25px;
+      background: rgba(127,141,121,.10);
+      border: 1px solid rgba(127,141,121,.20);
+    }
 
-    /* =====================================================
+    .rsvp-box p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 20px;
+      line-height: 1.5;
+      margin: 0 0 22px;
+    }
+
+    .rsvp-button {
+      display: inline-block;
+      padding: 15px 28px;
+      background: var(--sage-dark);
+      color: white;
+      text-decoration: none;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
        FOOTER
-    ===================================================== */
+    ========================================================= */
 
     footer {
-
-      padding:
-        60px 20px;
-
+      padding: 55px 20px;
       text-align: center;
-
-      background:
-        #4f594d;
-
-      color:
-        #eee8dc;
+      background: #e9e2d5;
     }
 
-
-    footer .footer-names {
-
-      font-family:
-        'Parisienne', cursive;
-
-      font-size: 42px;
+    .footer-names {
+      font-family: "Great Vibes", cursive;
+      font-size: 48px;
+      color: var(--sage-dark);
     }
 
-
-    footer p {
-
-      margin-top: 15px;
-
-      font-size: 9px;
-
-      letter-spacing: 3px;
-
-      text-transform: uppercase;
+    .footer-date {
+      margin-top: 8px;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--gold-dark);
+      letter-spacing: 2px;
     }
 
+    /* =========================================================
+       MÒBIL
+    ========================================================= */
 
+    @media (max-width: 380px) {
 
-    /* =====================================================
-       MÓVILES PEQUEÑOS
-    ===================================================== */
-
-    @media (max-width: 360px) {
-
-      .envelope {
-
-        width: 300px;
-
-        height: 200px;
+      .envelope-wrapper {
+        transform: scale(.88);
+        transform-origin: center bottom;
+        height: 350px;
       }
 
-
-      .letter {
-
-        width: 244px;
-
-        height: 170px;
-
-        left: 28px;
+      .opening-intro {
+        margin-bottom: 15px;
       }
 
-
-      .opening-title h1 {
-
-        font-size: 43px;
+      .open-button {
+        margin-top: 20px;
       }
-
     }
 
+    @media (min-width: 650px) {
+
+      .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
   </style>
-
 </head>
-
 
 <body>
 
+  <!-- =======================================================
+       PANTALLA D'OBERTURA
+  ======================================================== -->
+
+  <div class="opening-screen" id="openingScreen">
+
+    <div class="opening-content">
+
+      <div class="flower flower-left">
+        <div class="stem"></div>
+        <div class="leaf one"></div>
+        <div class="leaf two"></div>
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="flower-center"></div>
+      </div>
+
+      <div class="flower flower-right">
+        <div class="stem"></div>
+        <div class="leaf one"></div>
+        <div class="leaf two"></div>
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="flower-center"></div>
+      </div>
+
+      <div class="opening-intro">
+        <p class="opening-small">Una invitació especial</p>
+        <h1 class="opening-names">David &amp; Montse</h1>
+        <div class="opening-date">07 DE MAIG DE 2027</div>
+      </div>
 
 
-  <!-- ===================================================
-       SOBRE INICIAL
-  ==================================================== -->
+      <!-- SOBRE -->
 
-  <div
-    class="opening"
-    id="opening"
-  >
+      <div class="envelope-wrapper">
 
+        <div class="envelope" id="envelope">
 
-    <div class="paper">
+          <!-- Part posterior -->
+          <div class="envelope-back"></div>
 
+          <!-- Targeta interior -->
+          <div class="letter">
 
-      <!-- Flores provisionales -->
+            <div class="letter-small">
+              Ens casem
+            </div>
 
-      <div
-        class="flower top"
-      ></div>
+            <h2 class="letter-names">
+              David &amp; Montse
+            </h2>
 
+            <div class="letter-date">
+              07 · 05 · 2027
+            </div>
 
-      <div
-        class="flower bottom"
-      ></div>
+          </div>
 
+          <!-- Laterals -->
+          <div class="envelope-side-left"></div>
+          <div class="envelope-side-right"></div>
 
+          <!-- Butxaca frontal -->
+          <div class="envelope-pocket"></div>
 
-      <!-- Título -->
+          <!-- Solapa superior -->
+          <div class="flap"></div>
 
-      <div
-        class="opening-title"
-      >
+          <!-- Segell -->
+          <div class="wax"></div>
 
-        <p>
-          La nostra història
-        </p>
-
-        <h1>
-          David & Montse
-        </h1>
+        </div>
 
       </div>
 
 
-
-      <!-- =================================================
-           SOBRE
-      ================================================== -->
-
-      <div
-        class="envelope"
-        id="envelope"
-      >
-
-
-        <!-- Parte posterior -->
-
-        <div
-          class="envelope-back"
-        ></div>
-
-
-
-        <!-- =================================================
-             TARJETA
-
-             IMPORTANTE:
-             queda detrás del frontal.
-        ================================================== -->
-
-        <div
-          class="letter"
-        >
-
-          <div
-            class="letter-small"
-          >
-            El nostre casament
-          </div>
-
-
-          <div
-            class="letter-names"
-          >
-            David & Montse
-          </div>
-
-
-          <div
-            class="letter-date"
-          >
-            07 · 05 · 2027
-          </div>
-
-        </div>
-
-
-
-        <!-- Frente -->
-
-        <div
-          class="envelope-front"
-        ></div>
-
-
-
-        <!-- Solapa -->
-
-        <div
-          class="flap"
-        ></div>
-
-
-
-        <!-- Lacre -->
-
-        <div
-          class="wax"
-        >
-          D · M
-        </div>
-
-
-      </div>
-
-
-
-      <!-- Botón -->
+      <!-- BOTÓ -->
 
       <button
         class="open-button"
         id="openButton"
+        type="button"
       >
-        OBRIR LA INVITACIÓ
+        Obrir la invitació
       </button>
 
-
-
-      <!-- Flecha -->
-
-      <div
-        class="arrow"
-        id="arrow"
-      >
-        ↓
+      <div class="opening-hint">
+        Feu clic per descobrir-la
       </div>
 
-
     </div>
-
   </div>
 
 
+  <!-- =======================================================
+       INVITACIÓ
+  ======================================================== -->
 
-  <!-- ===================================================
-       INVITACIÓN
-  ==================================================== -->
+  <main class="invitation" id="invitation">
 
-  <main
-    class="invitation"
-    id="invitation"
-  >
+    <!-- HERO -->
 
+    <section class="section">
+      <div class="section-inner">
 
+        <div class="eyebrow">
+          Ens casem
+        </div>
 
-    <!-- INTRO -->
+        <h1 class="hero-names">
+          David &amp; Montse
+        </h1>
 
-    <section
-      class="intro"
-    >
+        <div class="divider"></div>
 
-      <div class="eyebrow">
-        Ens casem!
+        <div class="hero-date">
+          07 DE MAIG DE 2027
+        </div>
+
+        <p class="intro-text">
+          Hi ha moments que mereixen ser compartits,
+          i aquest és un d'ells.
+          Ens encantaria celebrar aquest dia amb vosaltres.
+        </p>
+
       </div>
-
-
-      <h1 class="names">
-
-        David
-
-        <br>
-
-        <span>
-          &
-        </span>
-
-        <br>
-
-        Montse
-
-      </h1>
-
-
-      <div
-        class="divider"
-      ></div>
-
-
-      <div class="date">
-        07 DE MAIG DE 2027
-      </div>
-
-
-      <p
-        class="text"
-        style="margin-top:35px;"
-      >
-
-        Hi ha moments a la vida
-        que mereixen ser compartits.
-        I aquest és un d'ells.
-
-      </p>
-
     </section>
-
 
 
     <!-- COUNTDOWN -->
 
-    <section
-      class="green"
-    >
+    <section class="section countdown-section">
 
-      <div class="eyebrow">
-        Guarda la data
-      </div>
+      <div class="section-inner">
 
+        <div class="eyebrow">
+          El gran dia
+        </div>
 
-      <h2
-        class="section-title"
-      >
-        Comença el compte enrere
-      </h2>
+        <h2 class="detail-title">
+          El compte enrere ha començat
+        </h2>
 
+        <div class="countdown">
 
-      <div
-        class="countdown"
-      >
-
-
-        <div class="count-box">
-
-          <div
-            class="count-number"
-            id="days"
-          >
-            --
+          <div class="countdown-item">
+            <span class="countdown-number" id="days">--</span>
+            <span class="countdown-label">Dies</span>
           </div>
 
-          <div
-            class="count-label"
-          >
-            Dies
+          <div class="countdown-item">
+            <span class="countdown-number" id="hours">--</span>
+            <span class="countdown-label">Hores</span>
+          </div>
+
+          <div class="countdown-item">
+            <span class="countdown-number" id="minutes">--</span>
+            <span class="countdown-label">Minuts</span>
+          </div>
+
+          <div class="countdown-item">
+            <span class="countdown-number" id="seconds">--</span>
+            <span class="countdown-label">Segons</span>
           </div>
 
         </div>
 
+      </div>
+    </section>
 
 
-        <div class="count-box">
+    <!-- DETALLS -->
 
-          <div
-            class="count-number"
-            id="hours"
-          >
-            --
+    <section class="section">
+
+      <div class="section-inner">
+
+        <div class="eyebrow">
+          La celebració
+        </div>
+
+        <h2 class="hero-date">
+          Un dia per recordar
+        </h2>
+
+        <div class="details-grid">
+
+          <div class="detail-card">
+
+            <div class="detail-icon">
+              I
+            </div>
+
+            <h3 class="detail-title">
+              Cerimònia
+            </h3>
+
+            <p class="detail-text">
+              Aquí hi afegirem més endavant
+              el lloc i l'hora de la cerimònia.
+            </p>
+
           </div>
 
-          <div
-            class="count-label"
-          >
-            Hores
+          <div class="detail-card">
+
+            <div class="detail-icon">
+              II
+            </div>
+
+            <h3 class="detail-title">
+              Celebració
+            </h3>
+
+            <p class="detail-text">
+              Aquí hi afegirem més endavant
+              el lloc i els detalls de la celebració.
+            </p>
+
           </div>
 
         </div>
 
+        <a href="#" class="calendar-button">
+          Afegir al calendari
+        </a>
+
+      </div>
+    </section>
 
 
-        <div class="count-box">
+    <!-- RSVP -->
 
-          <div
-            class="count-number"
-            id="minutes"
-          >
-            --
-          </div>
+    <section class="section">
 
-          <div
-            class="count-label"
-          >
-            Minuts
-          </div>
+      <div class="section-inner">
+
+        <div class="eyebrow">
+          Confirma la teva assistència
+        </div>
+
+        <h2 class="hero-date">
+          Ens encantaria comptar amb tu
+        </h2>
+
+        <div class="rsvp-box">
+
+          <p>
+            Més endavant afegirem aquí
+            el formulari de confirmació
+            d'assistència.
+          </p>
+
+          <a href="#" class="rsvp-button">
+            Confirmar assistència
+          </a>
 
         </div>
 
-
-
-        <div class="count-box">
-
-          <div
-            class="count-number"
-            id="seconds"
-          >
-            --
-          </div>
-
-          <div
-            class="count-label"
-          >
-            Segons
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-      <button
-        class="calendar-button"
-      >
-        + AFEGIR AL CALENDARI
-      </button>
-
-    </section>
-
-
-
-    <!-- CEREMONIA -->
-
-    <section>
-
-      <div class="eyebrow">
-        El gran dia
-      </div>
-
-
-      <h2
-        class="section-title"
-      >
-        La cerimònia
-      </h2>
-
-
-      <div
-        class="info-card"
-      >
-
-        <h3>
-          07 de maig de 2027
-        </h3>
-
-
-        <p>
-
-          Cerimònia
-
-          <br>
-
-          17:00 h
-
-        </p>
-
-
-        <div
-          class="divider"
-        ></div>
-
-
-        <p>
-
-          Properament us explicarem
-
-          <br>
-
-          tots els detalls del lloc.
-
-        </p>
-
       </div>
 
     </section>
-
-
-
-    <!-- CELEBRACIÓN -->
-
-    <section
-      class="gold"
-    >
-
-      <div class="eyebrow">
-        I després...
-      </div>
-
-
-      <h2
-        class="section-title"
-      >
-        La celebració
-      </h2>
-
-
-      <div
-        class="info-card"
-      >
-
-        <h3>
-          Brindem per nosaltres
-        </h3>
-
-
-        <p>
-
-          Després de la cerimònia,
-          celebrarem aquest dia tan especial
-          amb totes les persones que estimem.
-
-        </p>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- CONFIRMACIÓN -->
-
-    <section
-      class="green"
-    >
-
-      <div class="eyebrow">
-        Us esperem
-      </div>
-
-
-      <h2
-        class="section-title"
-      >
-        Voleu acompanyar-nos?
-      </h2>
-
-
-      <p class="text">
-
-        La vostra presència és
-        el millor regal
-        que podríem tenir.
-
-      </p>
-
-
-      <button
-        class="calendar-button"
-      >
-        CONFIRMAR ASSISTÈNCIA
-      </button>
-
-    </section>
-
 
 
     <!-- FOOTER -->
 
     <footer>
 
-      <div
-        class="footer-names"
-      >
-        David & Montse
+      <div class="footer-names">
+        David &amp; Montse
       </div>
 
-
-      <p>
+      <div class="footer-date">
         07 · 05 · 2027
-      </p>
+      </div>
 
     </footer>
-
 
   </main>
 
 
-
-  <!-- ===================================================
+  <!-- =======================================================
        JAVASCRIPT
-  ==================================================== -->
+  ======================================================== -->
 
   <script>
 
-
-    /* =================================================
-       ELEMENTOS
-    ================================================= */
-
-    const openButton =
-      document.getElementById(
-        "openButton"
-      );
+    const openButton = document.getElementById("openButton");
+    const envelope = document.getElementById("envelope");
+    const openingScreen = document.getElementById("openingScreen");
+    const invitation = document.getElementById("invitation");
 
 
-    const envelope =
-      document.getElementById(
-        "envelope"
-      );
+    /*
+      OBRIR SOBRE
+    */
+
+    openButton.addEventListener("click", function () {
+
+      envelope.classList.add("open");
+
+      openButton.disabled = true;
+
+      /*
+        Esperem que la targeta surti del sobre
+        abans de mostrar la invitació completa.
+      */
+
+      setTimeout(function () {
+
+        openingScreen.classList.add("hidden");
+        invitation.classList.add("visible");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "instant"
+        });
+
+      }, 2500);
+
+    });
 
 
-    const opening =
-      document.getElementById(
-        "opening"
-      );
-
-
-    const invitation =
-      document.getElementById(
-        "invitation"
-      );
-
-
-    const arrow =
-      document.getElementById(
-        "arrow"
-      );
-
-
-
-    /* =================================================
-       APERTURA
-    ================================================= */
-
-    openButton.addEventListener(
-      "click",
-      function () {
-
-
-        /*
-          Ocultamos botón y flecha.
-        */
-
-        openButton.classList.add(
-          "hide"
-        );
-
-
-        arrow.classList.add(
-          "hide"
-        );
-
-
-        /*
-          Iniciamos la secuencia.
-        */
-
-        envelope.classList.add(
-          "open"
-        );
-
-
-        /*
-          Esperamos a que la tarjeta
-          termine de salir.
-        */
-
-        setTimeout(
-          function () {
-
-            opening.classList.add(
-              "hidden"
-            );
-
-
-            invitation.classList.add(
-              "visible"
-            );
-
-
-            window.scrollTo(
-              0,
-              0
-            );
-
-          },
-
-          2600
-        );
-
-      }
-    );
-
-
-
-    /* =================================================
-       CUENTA ATRÁS
-    ================================================= */
+    /*
+      COUNTDOWN
+    */
 
     const weddingDate =
-      new Date(
-        "2027-05-07T17:00:00"
-      );
-
+      new Date("2027-05-07T17:00:00");
 
     function updateCountdown() {
 
-
-      const now =
-        new Date();
-
+      const now = new Date();
 
       const difference =
-        weddingDate - now;
+        weddingDate.getTime() - now.getTime();
 
+      if (difference <= 0) {
 
-      if (
-        difference <= 0
-      ) {
-
-        document.getElementById(
-          "days"
-        ).textContent = "0";
-
-
-        document.getElementById(
-          "hours"
-        ).textContent = "0";
-
-
-        document.getElementById(
-          "minutes"
-        ).textContent = "0";
-
-
-        document.getElementById(
-          "seconds"
-        ).textContent = "0";
-
+        document.getElementById("days").textContent = "0";
+        document.getElementById("hours").textContent = "0";
+        document.getElementById("minutes").textContent = "0";
+        document.getElementById("seconds").textContent = "0";
 
         return;
       }
 
-
       const days =
         Math.floor(
-          difference /
-          (
-            1000 *
-            60 *
-            60 *
-            24
-          )
+          difference / (1000 * 60 * 60 * 24)
         );
-
 
       const hours =
         Math.floor(
-          (
-            difference /
-            (
-              1000 *
-              60 *
-              60
-            )
-          ) % 24
+          (difference / (1000 * 60 * 60)) % 24
         );
-
 
       const minutes =
         Math.floor(
-          (
-            difference /
-            (
-              1000 *
-              60
-            )
-          ) % 60
+          (difference / (1000 * 60)) % 60
         );
-
 
       const seconds =
         Math.floor(
-          (
-            difference /
-            1000
-          ) % 60
+          (difference / 1000) % 60
         );
 
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
 
-      document.getElementById(
-        "days"
-      ).textContent =
-        days;
+      document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
 
-
-      document.getElementById(
-        "hours"
-      ).textContent =
-        hours;
-
-
-      document.getElementById(
-        "minutes"
-      ).textContent =
-        minutes;
-
-
-      document.getElementById(
-        "seconds"
-      ).textContent =
-        seconds;
-
+      document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
     }
-
 
     updateCountdown();
 
-
-    setInterval(
-      updateCountdown,
-      1000
-    );
-
+    setInterval(updateCountdown, 1000);
 
   </script>
 
-
 </body>
-
 </html>
